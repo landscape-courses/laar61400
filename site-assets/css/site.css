@@ -21,7 +21,7 @@ a:hover { color: var(--accent-dark); }
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gray-400);
+  color: var(--gray-500);
   border: 1px solid #ccc;
   padding: 1px 6px;
   border-radius: 2px;
@@ -95,7 +95,7 @@ body {
 
 .site-nav-meta {
   font-size: 12px;
-  color: var(--gray-400);
+  color: var(--gray-500);
   line-height: 1.5;
   margin-bottom: 40px;
 }
@@ -159,7 +159,7 @@ body {
 .site-nav-sublink {
   font-size: 12px;
   text-decoration: none;
-  color: var(--gray-400);
+  color: var(--gray-500);
   transition: color 0.15s;
 }
 .site-nav-sublink:hover { color: var(--gray-900); }
@@ -184,7 +184,7 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--gray-400);
+  color: var(--gray-500);
   margin-bottom: 20px;
   display: block;
 }
@@ -352,17 +352,21 @@ body {
   .site-nav-name { margin-bottom: 20px; }
   .site-nav-meta { margin-bottom: 20px; }
 
+  .site-nav-zh { margin-bottom: 16px; }
+
+  /* one row of top links; the project list lives on /projects/, so the sub-list
+     stays out of the phone nav and content starts on the first screen */
   .site-nav-links {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 0 20px;
     width: 100%;
   }
-
-  .site-nav-projects,
-  .site-nav-link {
-    width: 100%;
-  }
+  .site-nav-sublinks,
+  .site-nav-seal { display: none; }
+  .site-nav-projects[open] + .site-nav-link { margin-top: 0; }
+  .site-nav-link,
+  .site-nav-projects summary { display: block; padding: 6px 0; }
 
   #site-main {
     grid-column: 1;
@@ -472,7 +476,7 @@ body {
 
 .project-year {
   font-size: 11px;
-  color: var(--gray-400);
+  color: var(--gray-500);
   letter-spacing: 0.08em;
   margin-bottom: 32px;
 }
@@ -491,7 +495,7 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--gray-400);
+  color: var(--gray-500);
   margin-bottom: 8px;
   display: block;
 }
@@ -505,7 +509,7 @@ body {
 
 .project-meta-list .role {
   font-size: 10px;
-  color: var(--gray-400);
+  color: var(--gray-500);
 }
 
 .project-description {
@@ -524,7 +528,7 @@ body {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--gray-400);
+  color: var(--gray-500);
   margin: 48px 0 16px;
   display: block;
 }
@@ -532,13 +536,13 @@ body {
 .project-back {
   display: inline-block;
   font-size: 12px;
-  color: var(--gray-400);
+  color: var(--gray-500);
   text-decoration: none;
   margin-bottom: 32px;
   letter-spacing: 0.03em;
 }
 .project-back:hover { color: var(--gray-900); }
-.project-presentation { font-size: 12px; color: var(--gray-400); margin-top: 32px; }
+.project-presentation { font-size: 12px; color: var(--gray-500); margin-top: 32px; }
 
 /* ── Media grids ── */
 .media-full { width: 100%; display: block; margin: 24px 0; }

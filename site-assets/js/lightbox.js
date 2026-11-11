@@ -7,6 +7,7 @@
 
   let imgs = [];
   let current = 0;
+  let opener = null;   /* element focused before opening; focus returns there */
 
   /* ── Build overlay DOM ── */
   const overlay = document.createElement('div');
@@ -33,14 +34,20 @@
     lbImg.src = imgs[current].src;
     lbImg.alt = imgs[current].alt || '';
     lbCounter.textContent = (current + 1) + ' / ' + imgs.length;
-    overlay.classList.add('lb-visible');
-    document.body.style.overflow = 'hidden';
+    if (!overlay.classList.contains('lb-visible')) {
+      opener = document.activeElement;
+      overlay.classList.add('lb-visible');
+      document.body.style.overflow = 'hidden';
+      lbClose.focus();
+    }
   }
 
   function close() {
     overlay.classList.remove('lb-visible');
     document.body.style.overflow = '';
     lbImg.src = ''; /* free memory */
+    if (opener && opener.focus) opener.focus();
+    opener = null;
   }
 
   /* ── Navigation ── */
@@ -54,6 +61,12 @@
     if (e.key === 'Escape')      close();
     if (e.key === 'ArrowLeft')   open(current - 1);
     if (e.key === 'ArrowRight')  open(current + 1);
+    if (e.key === 'Tab') {        /* keep focus on the three buttons while open */
+      const btns = [lbClose, lbPrev, lbNext];
+      const i = btns.indexOf(document.activeElement);
+      e.preventDefault();
+      btns[(i + (e.shiftKey ? btns.length - 1 : 1)) % btns.length].focus();
+    }
   });
 
   /* ── Init: collect images after DOM ready ── */
@@ -63,6 +76,14 @@
     imgs = Array.from(main.querySelectorAll('img'));
     imgs.forEach(function (img, i) {
       img.classList.add('lb-trigger');
+      /* images inside a link keep the link's behavior */
+      if (!img.closest('a, button')) {
+        img.tabIndex = 0;
+        img.setAttribute('role', 'button');
+        img.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); }
+        });
+      }
       img.addEventListener('click', function () { open(i); });
     });
   });

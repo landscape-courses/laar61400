@@ -25,7 +25,7 @@
   --gray-750: #474747;
   --gray-700: #555;      /* secondary text */
   --gray-600: #6b6b6b;
-  --gray-500: #888;      /* notes, captions */
+  --gray-500: #767676;   /* notes, captions; 4.5:1 on white, the floor for small text */
   --gray-400: #aaa;
   --gray-300: #bbb;
   --gray-250: #ccc;
