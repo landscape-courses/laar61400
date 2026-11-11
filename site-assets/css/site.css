@@ -575,4 +575,15 @@ img { height: auto; }
   .media-2up,
   .media-3up { grid-template-columns: 1fr; }
   /* .media-4up intentionally not collapsed — stays as a row */
+  .project-back { padding: 8px 0; margin-bottom: 24px; }
+}
+
+/* Heading for screen readers only, on pages whose title lives in the nav (About) */
+.site-sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
